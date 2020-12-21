@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "182685077181",
+    "project_id": "mekotapp",
+    "storage_bucket": "mekotapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182685077181:android:68758e5fa6baaf2b6931d4",
+        "android_client_info": {
+          "package_name": "com.dicoding.dicoding_chatting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182685077181-lu5nplc31bpr71gklavumpspkjnbfskn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwblZ01EUOTJdgHiWj2vkqs7m5uZfD7Co"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182685077181-lu5nplc31bpr71gklavumpspkjnbfskn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

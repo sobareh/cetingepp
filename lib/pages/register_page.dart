@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -8,6 +9,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final _auth = FirebaseAuth.instance;
+
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -25,9 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _isLoading
-                ? Center(child: CircularProgressIndicator())
-                : Container(),
+            _isLoading ? Center(child: CircularProgressIndicator()) : Container(),
             Hero(
               tag: 'Dicoding Chatting',
               child: Text(
@@ -56,8 +57,7 @@ class _RegisterPageState extends State<RegisterPage> {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 suffixIcon: IconButton(
-                  icon: Icon(
-                      _obscureText ? Icons.visibility : Icons.visibility_off),
+                  icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
                   onPressed: () {
                     setState(() {
                       _obscureText = !_obscureText;
@@ -76,7 +76,29 @@ class _RegisterPageState extends State<RegisterPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
-              onPressed: () {},
+              onPressed: () async {
+                setState(() {
+                  _isLoading = true;
+                });
+
+                try {
+                  final email = _emailController.text;
+                  final password = _passwordController.text;
+
+                  final newUser =
+                      await _auth.createUserWithEmailAndPassword(email: email, password: password);
+                  if (newUser != null) {
+                    Navigator.pop(context);
+                  }
+                } catch (e) {
+                  final snackbar = SnackBar(content: Text(e.toString()));
+                  _scaffoldKey.currentState.showSnackBar(snackbar);
+                } finally {
+                  setState(() {
+                    _isLoading = false;
+                  });
+                }
+              },
             ),
             FlatButton(
               child: Text('Already have an account? Login'),
